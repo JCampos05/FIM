@@ -1,0 +1,234 @@
+.topbar {
+    background: var(--blue);
+    color: rgba(255, 255, 255, .7);
+    font-size: .78rem;
+    padding: 6px 0;
+    position: relative;
+    z-index: 101;
+}
+
+.topbar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar__links {
+    display: flex;
+    gap: 20px;
+}
+
+.topbar__link {
+    transition: var(--transition);
+}
+
+.topbar__link:hover {
+    color: var(--sky);
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    background: var(--navy);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--steel);
+    transition: box-shadow var(--transition);
+}
+
+.navbar.scrolled {
+    box-shadow: var(--shadow-lg);
+}
+
+.navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: 24px;
+}
+
+.navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--white);
+}
+
+.navbar__brand-mark {
+    width: 40px;
+    height: 40px;
+    background: var(--gold);
+    border-radius: var(--radius-sm);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    flex-shrink: 0;
+}
+
+.navbar__brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar__brand-name {
+    font-size: .9rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.navbar__brand-sub {
+    font-size: .7rem;
+    color: var(--sky);
+    opacity: .8;
+    letter-spacing: .04em;
+}
+
+.navbar__nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.navbar__link {
+    position: relative;
+    padding: 6px 14px;
+    font-size: .875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, .8);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.navbar__link:hover,
+.navbar__link.active {
+    color: var(--white);
+    background: rgba(255, 255, 255, .08);
+}
+
+.navbar__link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 14px;
+    right: 14px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 1px;
+}
+
+.navbar__dropdown {
+    position: relative;
+}
+
+.navbar__dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 240px;
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    padding: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: var(--transition);
+}
+
+.navbar__dropdown:hover .navbar__dropdown-menu,
+.navbar__dropdown:focus-within .navbar__dropdown-menu {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+.navbar__dropdown-item {
+    display: block;
+    padding: 8px 12px;
+    font-size: .875rem;
+    color: var(--text-primary);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.navbar__dropdown-item:hover {
+    background: var(--surface);
+    color: var(--steel);
+}
+
+.navbar__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    color: var(--white);
+}
+
+.navbar__toggle span {
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    display: block;
+    transition: var(--transition);
+}
+
+@media (max-width: 768px) {
+    .navbar__nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        position: fixed;
+        top: calc(var(--nav-height) + var(--topbar-height));
+        left: 0;
+        right: 0;
+        background: var(--navy);
+        padding: 16px;
+        gap: 2px;
+        border-bottom: 2px solid var(--steel);
+    }
+
+    .navbar__nav.open {
+        display: flex;
+    }
+
+    .navbar__dropdown-menu {
+        position: static;
+        opacity: 1;
+        pointer-events: all;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: rgba(255, 255, 255, .05);
+    }
+
+    .navbar__dropdown-item {
+        color: rgba(255, 255, 255, .8);
+    }
+
+    .navbar__dropdown-item:hover {
+        background: rgba(255, 255, 255, .08);
+        color: var(--white);
+    }
+
+    .navbar__toggle {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .topbar {
+        display: none;
+    }
+}
