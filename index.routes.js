@@ -1,35 +1,44 @@
 import { loadNavbar } from './app/components/navbar/navbar.js';
 import { loadFooter } from './app/components/footer/footer.js';
 
-const routes = {
-    '/': './app/views/home/home.view.js',
-    '/oferta-educativa': './app/views/oferta-educativa/oferta-educativa.view.js',
-    '/oferta-educativa/civil': './app/views/carreras/civil/civil.view.js',
-    '/oferta-educativa/geodesica': './app/views/carreras/geodesica/geodesica.view.js',
-    '/oferta-educativa/software': './app/views/carreras/software/software.view.js',
-    '/oferta-educativa/industrial': './app/views/carreras/industrial/industrial.view.js',
-    '/oferta-educativa/nanotecnologia': './app/views/carreras/nanotecnologia/nanotecnologia.view.js',
-    '/oferta-educativa/posgrado': './app/views/carreras/posgrado/posgrado.view.js',
-    '/servicios': './app/views/servicios/servicios.view.js',
-    '/servicios/servicio-social': './app/views/servicios/servicio-social/servicio-social.view.js',
-    '/servicios/practicas': './app/views/servicios/practicas/practicas.view.js',
-    '/servicios/tutorias': './app/views/servicios/tutorias/tutorias.view.js',
-    '/servicios/titulacion': './app/views/servicios/titulacion/titulacion.view.js',
-    '/directorio': './app/views/directorio/directorio.view.js',
-    '/noticias': './app/views/noticias/noticias.view.js',
-    '/contacto': './app/views/contacto/contacto.view.js',
-};
+const routes = [
+    { path: '/', module: () => import('./app/views/home/home.js') },
+    { path: '/oferta-educativa', module: () => import('./app/views/oferta-educativa/oferta-educativa.js') },
+    { path: '/oferta-educativa/civil', module: () => import('./app/views/carreras/civil/civil.js') },
+    { path: '/oferta-educativa/geodesica', module: () => import('./app/views/carreras/geodesica/geodesica.js') },
+    { path: '/oferta-educativa/software', module: () => import('./app/views/carreras/software/software.js') },
+    { path: '/oferta-educativa/industrial', module: () => import('./app/views/carreras/industrial/industrial.js') },
+    { path: '/oferta-educativa/nanotecnologia', module: () => import('./app/views/carreras/nanotecnologia/nanotecnologia.js') },
+    { path: '/oferta-educativa/posgrado', module: () => import('./app/views/carreras/posgrado/posgrado.js') },
+    { path: '/servicios', module: () => import('./app/views/servicios/servicios.js') },
+    { path: '/servicios/servicio-social', module: () => import('./app/views/servicios/servicio-social/servicio-social.js') },
+    { path: '/servicios/practicas', module: () => import('./app/views/servicios/practicas/practicas.js') },
+    { path: '/servicios/tutorias', module: () => import('./app/views/servicios/tutorias/tutorias.js') },
+    { path: '/servicios/titulacion', module: () => import('./app/views/servicios/titulacion/titulacion.js') },
+    { path: '/directorio', module: () => import('./app/views/directorio/directorio.js') },
+    { path: '/noticias', module: () => import('./app/views/noticias/noticias.js') },
+    { path: '/contacto', module: () => import('./app/views/contacto/contacto.js') },
+];
 
 const app = document.getElementById('app');
 
-async function injectCSS(path) {
-    const cssPath = path.replace('.view.js', '.view.css');
-    const id = cssPath;
-    if (document.querySelector(`link[data-view-css="${id}"]`)) return;
+async function injectCSS(routePath) {
+    const normalized = routePath === '/' ? 'home/home' : routePath.replace(/^\//, '').replace(/\//g, '/');
+    const base = routePath === '/'
+        ? './app/views/home/home.css'
+        : (() => {
+            const parts = routePath.replace(/^\//, '').split('/');
+            if (parts.length === 1) return `./app/views/${parts[0]}/${parts[0]}.css`;
+            if (parts[0] === 'oferta-educativa' && parts.length === 2) return `./app/views/carreras/${parts[1]}/${parts[1]}.css`;
+            if (parts[0] === 'servicios' && parts.length === 2) return `./app/views/servicios/${parts[1]}/${parts[1]}.css`;
+            return `./app/views/${parts.join('/')}/${parts[parts.length - 1]}.css`;
+        })();
+
+    if (document.querySelector(`link[data-view-css="${base}"]`)) return;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = cssPath;
-    link.dataset.viewCss = id;
+    link.href = base;
+    link.dataset.viewCss = base;
     document.head.appendChild(link);
 }
 
@@ -46,7 +55,8 @@ function setActiveLink(path) {
 }
 
 async function render(path) {
-    const modulePath = routes[path] ?? null;
+    const route = routes.find(r => r.path === path);
+    const modulePath = route ? route.path : null;
 
     removeViewCSS();
 
@@ -60,8 +70,8 @@ async function render(path) {
     }
 
     try {
-        await injectCSS(modulePath);
-        const module = await import(modulePath);
+        await injectCSS(route.path);
+        const module = await route.module();
         const html = await module.default();
         app.innerHTML = html;
         app.classList.remove('view-enter');

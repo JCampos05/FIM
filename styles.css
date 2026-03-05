@@ -118,7 +118,7 @@ button {
 }
 
 .overline {
-    font-size: .75rem;
+    font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: .12em;
     text-transform: uppercase;
@@ -230,9 +230,7 @@ button {
 
 
 /* --- Router --- */
-#app {
-    padding-top: calc(var(--nav-height) + var(--topbar-height));
-}
+#app { padding-top: 0; }
 
 .view-enter {
     animation: fadeSlideIn 300ms ease forwards;
@@ -330,11 +328,7 @@ button {
     .topbar {
         display: none;
     }
-
-    #app {
-        padding-top: var(--nav-height);
-    }
-
+    
     .navbar {
         top: 0;
     }
