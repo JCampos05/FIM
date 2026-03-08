@@ -119,10 +119,12 @@ button {
 
 .overline {
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: .12em;
     text-transform: uppercase;
     color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
 }
 
 .body-lg {

@@ -1,0 +1,141 @@
+/* --- Carrera hero base --- */
+.carrera-hero {
+    position: relative;
+    padding-block: 64px;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+}
+
+.carrera-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+.carrera-hero__inner {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.carrera-hero__content {
+    color: var(--white);
+}
+
+.carrera-hero__title {
+    margin-block: 8px 16px;
+}
+
+.carrera-hero__desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, .72);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 480px;
+}
+
+.carrera-hero__tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.carrera-hero__svg {
+    opacity: .92;
+    animation: carreraFloat 7s ease-in-out infinite;
+}
+
+@keyframes carreraFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* --- Planes --- */
+.planes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.plan-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.plan-card--alt {
+    opacity: .85;
+}
+
+.plan-card__header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.plan-card__header .overline {
+    margin-bottom: 6px;
+}
+
+.plan-card__header .heading-3 {
+    color: var(--steel);
+}
+
+.plan-card__list {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.plan-card__list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .9rem;
+    color: var(--text-secondary);
+}
+
+.plan-card__list li i {
+    color: var(--olive);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+/* --- FAQ --- */
+.carrera-faq {
+    max-width: 760px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .carrera-hero__inner {
+        grid-template-columns: 1fr;
+    }
+
+    .carrera-hero__svg {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .planes-grid {
+        grid-template-columns: 1fr;
+    }
+}

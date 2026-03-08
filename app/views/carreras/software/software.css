@@ -1,0 +1,9 @@
+.carrera-hero--software {
+    background: linear-gradient(135deg, #0d1f3c 0%, #0a2a4a 55%, #1a3a5c 100%);
+}
+
+.badge--software {
+    background: rgba(140, 147, 65, .2);
+    color: #c8d068;
+    border: 1px solid rgba(140, 147, 65, .35);
+}

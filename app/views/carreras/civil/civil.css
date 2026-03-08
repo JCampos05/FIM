@@ -1,0 +1,9 @@
+.carrera-hero--civil {
+    background: linear-gradient(135deg, var(--navy) 0%, #0a3d5c 60%, var(--slate) 100%);
+}
+
+.badge--civil {
+    background: rgba(217, 172, 56, .18);
+    color: #e8c84a;
+    border: 1px solid rgba(217, 172, 56, .3);
+}

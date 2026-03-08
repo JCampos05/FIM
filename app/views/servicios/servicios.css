@@ -1,0 +1,8 @@
+.carrera-hero--servicios {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 60%, var(--slate) 100%);
+}
+
+.carrera-hero__inner--single {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+}

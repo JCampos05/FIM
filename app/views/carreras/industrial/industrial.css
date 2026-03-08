@@ -1,0 +1,9 @@
+.carrera-hero--industrial {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a2a1a 60%, #2a3a2a 100%);
+}
+
+.badge--industrial {
+    background: rgba(167, 85, 34, .2);
+    color: #e8a070;
+    border: 1px solid rgba(167, 85, 34, .35);
+}

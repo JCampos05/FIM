@@ -23,22 +23,31 @@ const routes = [
 const app = document.getElementById('app');
 
 async function injectCSS(routePath) {
-    const normalized = routePath === '/' ? 'home/home' : routePath.replace(/^\//, '').replace(/\//g, '/');
-    const base = routePath === '/'
-        ? './app/views/home/home.css'
-        : (() => {
-            const parts = routePath.replace(/^\//, '').split('/');
-            if (parts.length === 1) return `./app/views/${parts[0]}/${parts[0]}.css`;
-            if (parts[0] === 'oferta-educativa' && parts.length === 2) return `./app/views/carreras/${parts[1]}/${parts[1]}.css`;
-            if (parts[0] === 'servicios' && parts.length === 2) return `./app/views/servicios/${parts[1]}/${parts[1]}.css`;
-            return `./app/views/${parts.join('/')}/${parts[parts.length - 1]}.css`;
-        })();
+    const cssPath = (() => {
+        if (routePath === '/') return './app/views/home/home.css';
 
-    if (document.querySelector(`link[data-view-css="${base}"]`)) return;
+        const parts = routePath.replace(/^\//, '').split('/');
+
+        if (parts.length === 1) {
+            return `./app/views/${parts[0]}/${parts[0]}.css`;
+        }
+
+        if (parts[0] === 'oferta-educativa' && parts.length === 2) {
+            return `./app/views/carreras/${parts[1]}/${parts[1]}.css`;
+        }
+
+        if (parts[0] === 'servicios' && parts.length === 2) {
+            return `./app/views/servicios/${parts[1]}/${parts[1]}.css`;
+        }
+
+        return `./app/views/${parts[parts.length - 1]}/${parts[parts.length - 1]}.css`;
+    })();
+
+    if (document.querySelector(`link[data-view-css="${cssPath}"]`)) return;
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = base;
-    link.dataset.viewCss = base;
+    link.href = cssPath;
+    link.dataset.viewCss = cssPath;
     document.head.appendChild(link);
 }
 
@@ -80,6 +89,7 @@ async function render(path) {
         window.scrollTo({ top: 0, behavior: 'instant' });
         setActiveLink(path);
         bindLinks();
+        if (module.init) await module.init();
     } catch (err) {
         app.innerHTML = notFound();
         console.error('[Router]', err);
@@ -105,9 +115,23 @@ window.addEventListener('popstate', () => {
     render(path);
 });
 
+async function injectGlobalCSS(path) {
+    if (document.querySelector(`link[data-component-css="${path}"]`)) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = path;
+    link.dataset.componentCss = path;
+    document.head.appendChild(link);
+}
+
 async function init() {
     await loadNavbar();
     await loadFooter();
+    injectGlobalCSS('./app/components/page-header/page-header.css');
+    injectGlobalCSS('./app/components/card-grid/card-grid.css');
+    injectGlobalCSS('./app/components/accordion/accordion.css');
+    injectGlobalCSS('./app/views/carreras/carrera-base.css');
+    injectGlobalCSS('./app/views/servicios/servicios.css');
     const path = window.location.hash.replace('#', '') || '/';
     render(path);
     bindLinks();

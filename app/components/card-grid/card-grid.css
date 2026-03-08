@@ -1,0 +1,67 @@
+.card-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.card-grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.card-grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.card__icon--blue {
+    background: rgba(5, 60, 114, .1);
+    color: var(--steel);
+}
+
+.card__icon--sage {
+    background: rgba(100, 131, 106, .12);
+    color: var(--sage);
+}
+
+.card__icon--gold {
+    background: rgba(217, 172, 56, .15);
+    color: #8a6a10;
+}
+
+.card__icon--copper {
+    background: rgba(167, 85, 34, .12);
+    color: var(--copper);
+}
+
+.card__icon--slate {
+    background: rgba(71, 108, 122, .12);
+    color: var(--slate);
+}
+
+.card__icon--olive {
+    background: rgba(140, 147, 65, .15);
+    color: #4e5318;
+}
+
+@media (max-width: 1024px) {
+    .card-grid--4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-grid--3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+
+    .card-grid--2,
+    .card-grid--3,
+    .card-grid--4 {
+        grid-template-columns: 1fr;
+    }
+}

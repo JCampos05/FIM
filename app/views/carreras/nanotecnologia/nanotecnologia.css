@@ -1,0 +1,9 @@
+.carrera-hero--nanotecnologia {
+    background: linear-gradient(135deg, var(--navy) 0%, #0d2a1a 60%, #1a3a2a 100%);
+}
+
+.badge--nano {
+    background: rgba(100, 131, 106, .22);
+    color: #a8d4b0;
+    border: 1px solid rgba(100, 131, 106, .38);
+}

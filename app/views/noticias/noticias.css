@@ -1,0 +1,133 @@
+.carrera-hero--noticias {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 60%, var(--slate) 100%);
+}
+
+/* --- Badges noticias --- */
+.badge--noticia-deporte {
+    background: rgba(167, 85, 34, .15);
+    color: #c4783a;
+    border: 1px solid rgba(167, 85, 34, .3);
+}
+
+.badge--noticia-academico {
+    background: rgba(5, 60, 114, .12);
+    color: var(--steel);
+    border: 1px solid rgba(5, 60, 114, .25);
+}
+
+.badge--noticia-aviso {
+    background: rgba(217, 172, 56, .15);
+    color: #8a6a10;
+    border: 1px solid rgba(217, 172, 56, .3);
+}
+
+.badge--noticia-logro {
+    background: rgba(100, 131, 106, .15);
+    color: var(--sage);
+    border: 1px solid rgba(100, 131, 106, .3);
+}
+
+/* --- Noticias grid --- */
+.noticias-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 24px;
+}
+
+.noticia-card--featured {
+    grid-row: 1 / 3;
+}
+
+.noticia-card__img {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, var(--steel), var(--slate));
+}
+
+.noticia-card--featured .noticia-card__img--featured {
+    aspect-ratio: 4/3;
+}
+
+.noticia-card__body {
+    padding: 20px;
+}
+
+.noticia-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.noticia-card__title {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.noticia-card--featured .noticia-card__title {
+    font-size: 1.2rem;
+}
+
+.noticia-card__text {
+    font-size: .875rem;
+    color: var(--text-secondary);
+}
+
+/* --- Avisos --- */
+.avisos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.aviso-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.aviso-item:hover {
+    border-color: var(--steel);
+    background: rgba(5, 60, 114, .02);
+}
+
+.aviso-item__icon {
+    flex-shrink: 0;
+    color: var(--steel);
+    font-size: 1.3rem;
+}
+
+.aviso-item__body {
+    flex: 1;
+}
+
+.aviso-item__titulo {
+    font-size: .9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.aviso-item__fecha {
+    font-size: .78rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+.aviso-item__badge {
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .noticias-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .noticia-card--featured {
+        grid-row: auto;
+    }
+}

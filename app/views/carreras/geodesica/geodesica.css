@@ -1,0 +1,9 @@
+.carrera-hero--geodesica {
+    background: linear-gradient(135deg, var(--navy) 0%, #0d3d4a 60%, var(--slate) 100%);
+}
+
+.badge--geodesica {
+    background: rgba(71, 108, 122, .25);
+    color: #a8d4e0;
+    border: 1px solid rgba(71, 108, 122, .4);
+}

@@ -1,0 +1,9 @@
+.carrera-hero--posgrado {
+    background: linear-gradient(135deg, #1a1a2e 0%, var(--navy) 50%, #0d2a3a 100%);
+}
+
+.badge--posgrado {
+    background: rgba(217, 172, 56, .18);
+    color: #e8c84a;
+    border: 1px solid rgba(217, 172, 56, .35);
+}
